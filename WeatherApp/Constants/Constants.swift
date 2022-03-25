@@ -14,11 +14,13 @@ let FIRS_TO_MAIN = "firsttomain"
 
 let BASE_URL = "https://api.openweathermap.org/data/2.5/"
 let WEATHER = "weather?"
+let FORECAST = "forecast?"
 let LAT = "lat="
 let LON = "&lon="
 let APP_ID = "&appid="
 let API_KEY = "2f11a4bac82f5c8ef4af0b4811e414e9"
 
 let CURRENT_WEATHER_URL = "\(BASE_URL)\(WEATHER)\(LAT)25.0757595\(LON)54.947555\(APP_ID)\(API_KEY)"
+let FORECAST_WEATHER_URL = "\(BASE_URL)\(FORECAST)\(LAT)25.0757595\(LON)54.947555\(APP_ID)\(API_KEY)"
 
 typealias CompletionHandler = (_ Success:Bool) -> ()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class firsPageVC: UIViewController {
+class firstPageVC: UIViewController {
 
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var getStartButton: UIButton!
@@ -17,6 +17,7 @@ class firsPageVC: UIViewController {
         
         
         print(CURRENT_WEATHER_URL)
+        print(FORECAST_WEATHER_URL)
         weatherUpdateLabel()
         getStartButton.layer.cornerRadius = 12
     }

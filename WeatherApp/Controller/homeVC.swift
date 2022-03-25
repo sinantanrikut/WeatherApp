@@ -7,7 +7,8 @@
 
 import UIKit
 
-class homeVC: UIViewController {
+class homeVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
+   
     @IBOutlet weak var dateLabel2: UILabel!
     @IBOutlet weak var weatherTable: UITableView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -22,6 +23,9 @@ class homeVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        weatherTable.dataSource = self
+        weatherTable.delegate = self
         
         myView.layer.cornerRadius = 20
         myView.layer.masksToBounds = true
@@ -40,6 +44,14 @@ class homeVC: UIViewController {
         dateLabel2.text = currentWeather.date
     }
     
-
-
+// View Data işlemleri
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
 }
