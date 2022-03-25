@@ -10,3 +10,4 @@ import Alamofire
 import SwiftyJSON
 
 
+class CurrentWeather{}
