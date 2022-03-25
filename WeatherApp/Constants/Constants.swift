@@ -19,5 +19,6 @@ let LON = "&lon="
 let APP_ID = "&appid="
 let API_KEY = "2f11a4bac82f5c8ef4af0b4811e414e9"
 
-let CURRENT_WEATHER_URL = "\(BASE_URL)\(WEATHER)\(LAT)39.971205\(LON)32.704476\(APP_ID)\(API_KEY)"
+let CURRENT_WEATHER_URL = "\(BASE_URL)\(WEATHER)\(LAT)25.0757595\(LON)54.947555\(APP_ID)\(API_KEY)"
 
+typealias CompletionHandler = (_ Success:Bool) -> ()

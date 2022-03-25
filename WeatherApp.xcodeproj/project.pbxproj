@@ -107,7 +107,6 @@
 				DD1C6F9EE538E750E0A10157 /* Pods-WeatherAppTests.debug.xcconfig */,
 				445D8FFB2678AA7299004B0B /* Pods-WeatherAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -178,8 +177,8 @@
 		BAE9DB3827DF7ED900717704 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				BA91086327EE6B36004ED7C4 /* Services */,
 				BA91086027EE274C004ED7C4 /* Constants */,
+				BA91086327EE6B36004ED7C4 /* Services */,
 				BA8824EE27E8DE34003806ED /* Controller */,
 				BA8824ED27E8DE2B003806ED /* Model */,
 				BAE9DB3927DF7ED900717704 /* AppDelegate.swift */,
