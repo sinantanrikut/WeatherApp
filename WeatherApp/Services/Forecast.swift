@@ -70,6 +70,33 @@ class Forecast{
         _date = unixConvertedDate.dayOfWeek()
         
     }
+    
+    func downloadForecastData(completion:@escaping CompletionHandler){
+        AF.request(FORECAST_WEATHER_URL,
+                   method: .get,
+                   encoding: JSONEncoding.default).responseString { (response) in
+            
+            switch response.result{
+                
+                case let .success(result):
+                
+                guard let data = response.data else {return}
+                let json = JSON(data)
+                
+                if let list = json["list"].array{
+                    for obj in list{
+                        let forecast = Forecast(weatherDict: obj)
+                        Forecast.forecast.append(forecast)
+                    }
+                }
+               
+                    completion(true)
+                case let .failure(error):
+                    debugPrint(error)
+                    completion(false)
+            }
+        }
+    }
 }
 
 extension Date{

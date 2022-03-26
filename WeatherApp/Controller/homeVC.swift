@@ -18,6 +18,7 @@ class homeVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var myView: UIView!
     
     var currentWeather:CurrentWeather!
+    var forecast:Forecast!
     var Temp:Double!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,11 @@ class homeVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
             print(Success)
             self.updateView()
         }
+        forecast = Forecast()
+        forecast.downloadForecastData { Success in
+            print(Forecast.forecast.count)
+            self.weatherTable.reloadData()
+        }
     }
     
     func updateView(){
@@ -46,11 +52,19 @@ class homeVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
 // View Data işlemleri
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return Forecast.forecast.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        // View Cell işlemi
+   
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath) as? WeatherCell{
+            
+            let forecast = Forecast.forecast[indexPath.row]
+            cell.updateView(forecast: forecast)
+            return cell
+        }else{ return  UITableViewCell()}
+        
     }
     
     
