@@ -11,16 +11,13 @@ struct LaunchScreen: View {
     var body: some View {
         ZStack {
             Color.white
-            
-            Image("turkcellBgLogo")
-                .accessibilityHidden(true)
-            
             VStack {
-                Image("hayalOrtagimLogoText")
+                Image("logo")
                     .resizable()
-                    .frame(width: 238,height: 197)
-                    .accessibility(label: Text("Hayal Ortağım Uygulaması"))
-
+                    .frame(width: 200,height: 200)
+                    .accessibility(label: Text("SwiftUI Weather App Task Uygulaması"))
+                Text("SwiftUI Weather App")
+                    .font(.setCustom(fontStyle: .title2, fontWeight: .bold))
             }
             .padding()
         }

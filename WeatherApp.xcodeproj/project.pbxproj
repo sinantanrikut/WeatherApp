@@ -14,6 +14,7 @@
 		BA40A6AB2CAECC1E0076FF1D /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6AA2CAECC1E0076FF1D /* LaunchScreen.swift */; };
 		BA40A6AE2CAECC8A0076FF1D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6AD2CAECC8A0076FF1D /* Color+Extensions.swift */; };
 		BA40A6B02CAECCAD0076FF1D /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6AF2CAECCAD0076FF1D /* Image+Extensions.swift */; };
+		BA40A6B22CAECF7E0076FF1D /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6B12CAECF7E0076FF1D /* Font+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		BA40A6AA2CAECC1E0076FF1D /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		BA40A6AD2CAECC8A0076FF1D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		BA40A6AF2CAECCAD0076FF1D /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		BA40A6B12CAECF7E0076FF1D /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			children = (
 				BA40A6AD2CAECC8A0076FF1D /* Color+Extensions.swift */,
 				BA40A6AF2CAECCAD0076FF1D /* Image+Extensions.swift */,
+				BA40A6B12CAECF7E0076FF1D /* Font+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA40A6B22CAECF7E0076FF1D /* Font+Extensions.swift in Sources */,
 				BA40A6932CAEC9F70076FF1D /* ContentView.swift in Sources */,
 				BA40A6B02CAECCAD0076FF1D /* Image+Extensions.swift in Sources */,
 				BA40A6912CAEC9F70076FF1D /* WeatherApp.swift in Sources */,
