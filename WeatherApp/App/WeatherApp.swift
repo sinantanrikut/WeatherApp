@@ -27,7 +27,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct WeatherApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
-//    @StateObject private var loginViewModel = LoginViewModel()
+    @StateObject private var loginViewModel = LoginViewModel()
 //    @StateObject private var appTheme = AppTheme()
 //    @StateObject private var userViewModel = UserViewModel()
 //    @StateObject private var navigationManager = NavigationManager()
@@ -47,7 +47,7 @@ struct WeatherApp: App {
                 
                 ContentView()
                     .preferredColorScheme(.light)
-//                    .environmentObject(loginViewModel)
+                    .environmentObject(loginViewModel)
 //                    .environmentObject(appTheme)
 //                    .environmentObject(userViewModel)
 //                    .environmentObject(navigationManager)

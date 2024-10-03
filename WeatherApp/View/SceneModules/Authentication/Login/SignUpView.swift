@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  SignUpView.swift
 //  WeatherApp
 //
 //  Created by Sinan Tanrıkut on 3.10.2024.
@@ -7,70 +7,62 @@
 
 import SwiftUI
 
-struct LoginView: View {
-    @EnvironmentObject private var viewModel : LoginViewModel
-    
+import SwiftUI
+import FirebaseAuth
+
+struct SignUpView: View {
     @State private var email = ""
     @State private var password = ""
-    @State private var showSignup = false
     @State private var errorMessage = ""
-    
+
     var body: some View {
         VStack {
             TextField("Email", text: $email)
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(5)
-            
+
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(5)
-            
+
             Button(action: {
-                viewModel.login(email: email, password: password)
-                
+                signUp()
             }, label: {
-                Text("Log In")
+                Text("Sign Up")
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(Color.green)
                     .cornerRadius(5)
             })
             .padding(.top, 20)
-            
+
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
             }
-            
+
             Spacer()
-            
-            HStack {
-                Text("Don't have an account?")
-                Button(action: {
-                    showSignup.toggle()
-                }) {
-                    Text("Sign Up")
-                        .foregroundColor(.blue)
-                }
-            }
-            .padding()
-            
         }
         .padding()
-        .navigationTitle("Log In")
-        .sheet(isPresented: $showSignup) {
-            SignUpView()
+        .navigationTitle("Sign Up")
+    }
+
+    func signUp() {
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                errorMessage = error.localizedDescription
+            } else {
+                errorMessage = "Account created successfully!"
+            }
         }
-        .workaroundLink(to:HomeView().navigationBarBackButtonHidden(), isActive: $viewModel.isLogin)
-        
     }
 }
 
 
 #Preview {
-    LoginView()
+    SignUpView()
 }

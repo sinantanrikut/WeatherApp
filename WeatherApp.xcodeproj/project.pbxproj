@@ -36,6 +36,10 @@
 		BA40A6DF2CAEDA4E0076FF1D /* GlobalHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6DE2CAEDA4E0076FF1D /* GlobalHelpers.swift */; };
 		BA40A6E12CAEDABD0076FF1D /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6E02CAEDABD0076FF1D /* Data+Extensions.swift */; };
 		BA40A6E42CAEDBC60076FF1D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6E32CAEDBC60076FF1D /* LoginView.swift */; };
+		BA40A6E72CAEDD3C0076FF1D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BA40A6E62CAEDD3C0076FF1D /* FirebaseAuth */; };
+		BA40A6E92CAEDD920076FF1D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6E82CAEDD920076FF1D /* SignUpView.swift */; };
+		BA40A6ED2CAEE1810076FF1D /* WorkaroundLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6EC2CAEE1810076FF1D /* WorkaroundLink.swift */; };
+		BA40A6F02CAEE1B90076FF1D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA40A6EF2CAEE1B90076FF1D /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,9 @@
 		BA40A6DE2CAEDA4E0076FF1D /* GlobalHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHelpers.swift; sourceTree = "<group>"; };
 		BA40A6E02CAEDABD0076FF1D /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		BA40A6E32CAEDBC60076FF1D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BA40A6E82CAEDD920076FF1D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		BA40A6EC2CAEE1810076FF1D /* WorkaroundLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkaroundLink.swift; sourceTree = "<group>"; };
+		BA40A6EF2CAEE1B90076FF1D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA40A6BD2CAED1740076FF1D /* FirebaseAppCheck in Frameworks */,
+				BA40A6E72CAEDD3C0076FF1D /* FirebaseAuth in Frameworks */,
 				BA40A6B72CAED1740076FF1D /* FirebaseAnalytics in Frameworks */,
 				BA40A6BF2CAED1740076FF1D /* FirebaseAppDistribution-Beta in Frameworks */,
 				BA40A6BB2CAED1740076FF1D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -87,6 +95,7 @@
 			children = (
 				BA40A68F2CAEC9F70076FF1D /* WeatherApp */,
 				BA40A68E2CAEC9F70076FF1D /* Products */,
+				BA40A6E52CAEDD3C0076FF1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +145,7 @@
 		BA40A69F2CAECAE70076FF1D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BA40A6EB2CAEE1700076FF1D /* Components */,
 				BA40A6A82CAECBFC0076FF1D /* SceneModules */,
 				BA40A6922CAEC9F70076FF1D /* ContentView.swift */,
 			);
@@ -206,6 +216,7 @@
 		BA40A6A82CAECBFC0076FF1D /* SceneModules */ = {
 			isa = PBXGroup;
 			children = (
+				BA40A6EE2CAEE1A00076FF1D /* Home */,
 				BA40A6C02CAED3420076FF1D /* Authentication */,
 				BA40A6A92CAECC0D0076FF1D /* LaunchScreen */,
 			);
@@ -277,8 +288,32 @@
 			isa = PBXGroup;
 			children = (
 				BA40A6E32CAEDBC60076FF1D /* LoginView.swift */,
+				BA40A6E82CAEDD920076FF1D /* SignUpView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		BA40A6E52CAEDD3C0076FF1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA40A6EB2CAEE1700076FF1D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BA40A6EC2CAEE1810076FF1D /* WorkaroundLink.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		BA40A6EE2CAEE1A00076FF1D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BA40A6EF2CAEE1B90076FF1D /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +338,7 @@
 				BA40A6BA2CAED1740076FF1D /* FirebaseAnalyticsWithoutAdIdSupport */,
 				BA40A6BC2CAED1740076FF1D /* FirebaseAppCheck */,
 				BA40A6BE2CAED1740076FF1D /* FirebaseAppDistribution-Beta */,
+				BA40A6E62CAEDD3C0076FF1D /* FirebaseAuth */,
 			);
 			productName = WeatherApp;
 			productReference = BA40A68D2CAEC9F70076FF1D /* WeatherApp.app */;
@@ -371,6 +407,7 @@
 				BA40A6DB2CAED9B80076FF1D /* UserService.swift in Sources */,
 				BA40A6D62CAED92B0076FF1D /* ErrorType.swift in Sources */,
 				BA40A6DD2CAED9DD0076FF1D /* BaseService.swift in Sources */,
+				BA40A6ED2CAEE1810076FF1D /* WorkaroundLink.swift in Sources */,
 				BA40A6E12CAEDABD0076FF1D /* Data+Extensions.swift in Sources */,
 				BA40A6912CAEC9F70076FF1D /* WeatherApp.swift in Sources */,
 				BA40A6C62CAED81A0076FF1D /* BaseViewModel.swift in Sources */,
@@ -378,9 +415,11 @@
 				BA40A6AB2CAECC1E0076FF1D /* LaunchScreen.swift in Sources */,
 				BA40A6C92CAED85E0076FF1D /* LoginViewModel.swift in Sources */,
 				BA40A6E42CAEDBC60076FF1D /* LoginView.swift in Sources */,
+				BA40A6E92CAEDD920076FF1D /* SignUpView.swift in Sources */,
 				BA40A6D02CAED9020076FF1D /* ServiceProvider.swift in Sources */,
 				BA40A6AE2CAECC8A0076FF1D /* Color+Extensions.swift in Sources */,
 				BA40A6DF2CAEDA4E0076FF1D /* GlobalHelpers.swift in Sources */,
+				BA40A6F02CAEE1B90076FF1D /* HomeView.swift in Sources */,
 				BA40A6D22CAED9150076FF1D /* EndPoint.swift in Sources */,
 				BA40A6CC2CAED8C10076FF1D /* SessionManager.swift in Sources */,
 			);
@@ -625,6 +664,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
+		};
+		BA40A6E62CAEDD3C0076FF1D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
