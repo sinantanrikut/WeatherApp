@@ -50,13 +50,12 @@ WeatherApp is a SwiftUI application that allows users to save and view their fav
 ## Visuals
 
 Here is a link to a video showcasing the app:
-[Watch the demo video here](https://example.com)  <!-- Replace with your actual video link -->
+[Watch the demo video here](https://youtu.be/odVUdc4rduA)  <!-- Replace with your actual video link -->
 
 ## Screenshots
-![Screenshot1](https://img.imgyukle.com/2024/10/05/CarLeA.png)
-![CarLeA](https://img.imgyukle.com/2024/10/05/CarLeA.png)
-![CarHcH](https://github.com/kullanıcı_adı/repo_adi/raw/main/görsel_yolu/CarHcH.png)
-![CarOk1](https://github.com/kullanıcı_adı/repo_adi/raw/main/görsel_yolu/CarOk1.png)
+![Screenshot1](https://github.com/sinantanrikut/WeatherApp/blob/main/screenshot/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-10-05%20at%2002.42.47.png?raw=true)
+![Screenshot1](https://github.com/sinantanrikut/WeatherApp/blob/main/screenshot/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-10-05%20at%2002.42.51.png?raw=true)
+![Screenshot1](https://github.com/sinantanrikut/WeatherApp/blob/main/screenshot/Simulator%20Screenshot%20-%20iPhone%2015%20Pro%20Max%20-%202024-10-05%20at%2002.42.59.png?raw=true)
 
 
 ## Contributing
