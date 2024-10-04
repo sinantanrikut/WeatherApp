@@ -12,10 +12,6 @@ class BaseService {
     
     let serviceProvider = ServiceProvider.shared
     let apiManager = APIManager.shared
-    
-    var handleCompletion: ((Subscribers.Completion<Error>) -> Void) {
-        apiManager.handleCompletion
-    }
-    
+
     
 }

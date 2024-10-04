@@ -14,168 +14,175 @@ final class APIManager {
     public static let shared = APIManager()
     
     private var showLoading = true
+       
+    typealias CurrentWeatherCompletionHandler = (CurrentWeather?, Error?) -> Void
+    typealias ForecastWeatherCompletionHandler = (ForecastWeatherResponse?, Error?) -> Void
+
+    private let apiKey = "9443786f946d0de25ec663f26e82c537"
+    private let decoder = JSONDecoder()
+    private let session: URLSession
+
+    private enum SuffixURL: String {
+        case forecastWeather = "forecast"
+        case currentWeather = "weather"
+    }
+        
+    private func baseUrl(_ suffixURL: SuffixURL, param: String) -> URL {
+        return URL(string: "https://api.openweathermap.org/data/2.5/\(suffixURL.rawValue)?APPID=\(self.apiKey)&units=metric\(param)")!
+    }
+        
+    init(configuration: URLSessionConfiguration) {
+        self.session = URLSession(configuration: configuration)
+    }
     
-    private init() {}
-   
-    public func fetchData<T: Decodable>(url: URL, pathVariables: [String]? = nil, body: Encodable? = nil, showLoading: Bool = true, bodyParameters: [String: String]? = nil, method: HttpMethod) -> AnyPublisher<T, Error> {
-        // Loading indicator
-        self.showLoading = showLoading
+    convenience init() {
+        self.init(configuration: .default)
+    }
         
-        // URL Components
-        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        if let pathVariables = pathVariables, !pathVariables.isEmpty {
-            let path = components?.path ?? ""
-            components?.path = String(format: path, arguments: pathVariables)
-        }
-        guard let finalUrl = components?.url else {
-            return Fail<T, Error>(error: NetworkError.invalidUrl).eraseToAnyPublisher()
-        }
+    private func getBaseRequest<T: Codable>(at cityId: String,
+                                            suffixURL: SuffixURL,
+                                            completionHandler completion:  @escaping (_ object: T?,_ error: Error?) -> ()) {
         
-        // Request
-        var request = URLRequest(url: finalUrl)
-        let session = URLSession.shared
-        request.httpMethod = method.rawValue
-   
-        // x-www-form-urlencoded body
-        if let bodyParameters {
-            let bodyData = bodyParameters.compactMap { key, value in
-                return "\(key)=\(value)"
-            }.joined(separator: "&")
-            
-            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            request.httpBody = bodyData.data(using: .utf8)
-            printSuccess("Request body: \(String(data: request.httpBody ?? Data(), encoding: .utf8) ?? "")")
-        } else {
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
+        let url = baseUrl(suffixURL, param: "&id=\(cityId)")
+        let request = URLRequest(url: url)
         
-        // Body
-        if let body {
-            request.httpBody = try? JSONEncoder().encode(body)
-            printSuccess("Request body: ", body)
-        }
-        
-        printSuccess("Request headers: ", request.allHTTPHeaderFields ?? ["":""])
-        printSuccess("Request URL: ", finalUrl)
-        
-        return session.dataTaskPublisher(for: request)
-            .subscribe(on: DispatchQueue.global(qos: .default))
-            .tryMap(tryMapHandler)
-            .receive(on: DispatchQueue.main)
-            .decode(type: T.self, decoder: JSONDecoder())
-            .handleEvents(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(_):
-                    break
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        printError(response ?? "e")
+                        return
+                    }
+                    
+                    if httpResponse.statusCode == 200 {
+                        do {
+                            let weather = try self.decoder.decode(T.self, from: data)
+                            completion(weather, nil)
+                        } catch let error {
+                            completion(nil, error)
+                        }
+                    } else {
+                        printError(response ?? "e")
+                    }
+                } else if let error = error {
+                    completion(nil, error)
                 }
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    enum NetworkError: Error {
-        case invalidUrl
-        case requestFailed
-        case invalidResponse
-        // diğer hatalar
-    }
-    
-    func sendData<T: Decodable>(url: URL, formData: [String: Any], filePathKey: String) -> AnyPublisher<T, Error> {
-        var request = URLRequest(url: url)
-        let session = URLSession.shared
-        
-        let bodyBoundary = "--------------------------\(UUID().uuidString)"
-        
-        // method
-        request.httpMethod = HttpMethod.post.rawValue
-        
-        // headers
-        request.addValue("multipart/form-data; boundary=\(bodyBoundary)", forHTTPHeaderField: "Content-Type")
-        // body
-        let imageData = formData["image"] as? Data
-        let requestData = createRequestBody(formData: formData, imageData: imageData, boundary: bodyBoundary, attachmentKey: filePathKey, fileName: "\(filePathKey).jpg")
-        request.httpBody = requestData
-        
-        printInfo("Request body: ", request.httpBody ?? "")
-        
-        // dataTask
-        return session.dataTaskPublisher(for: request)
-            .subscribe(on: DispatchQueue.global(qos: .default))
-//            .tryMap { data, response in
-//                // Check response status here (e.g., 200 OK) and handle any errors.
-//                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-//                    throw URLError(.badServerResponse)
-//                }
-//                return data
-//            }
-            .tryMap(tryMapHandler)
-            .decode(type: T.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    // Handle any network-related or decoding errors here.
-                    print("Error: \(error)")
-                }
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    private func createRequestBody(formData: [String: Any], imageData: Data?, boundary: String, attachmentKey: String, fileName: String) -> Data {
-        let lineBreak = "\r\n"
-        var requestBody = Data()
-        
-        for (key, value) in formData {
-            requestBody.appendString("--\(boundary + lineBreak)")
-            
-            if let stringValue = value as? String {
-                requestBody.appendString("Content-Disposition: form-data; name=\"\(key)\"\(lineBreak + lineBreak)")
-                requestBody.appendString("\(stringValue)\(lineBreak)")
-            } else if key == "image", let imageData = imageData {
-                requestBody.appendString("Content-Disposition: form-data; name=\"\(attachmentKey)\"; filename=\"\(fileName)\"\(lineBreak)")
-                requestBody.appendString("Content-Type: image/jpeg \(lineBreak + lineBreak)")
-                requestBody.append(imageData)
-                requestBody.appendString("\(lineBreak)")
             }
         }
         
-        requestBody.appendString("--\(boundary)--\(lineBreak)")
-        
-        return requestBody
+        task.resume()
     }
     
-  
-    
-    public lazy var handleCompletion: ((Subscribers.Completion<Error>) -> Void) = { [weak self] completion in
-        switch completion {
-        case .finished:
-            printSuccess("Finished!")
-        case .failure(let error):
-            printError(error.localizedDescription)
-            guard let self else { return }
+    func getCurrentWeather(at latitude: Double, longitude: Double, completionHandler completion: @escaping CurrentWeatherCompletionHandler) {
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&APPID=\(self.apiKey)&units=metric")!
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        completion(nil, error)
+                        return
+                    }
+                    
+                    do {
+                        let weather = try self.decoder.decode(CurrentWeather.self, from: data)
+                        completion(weather, nil)
+                    } catch let error {
+                        completion(nil, error)
+                    }
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
         }
+        
+        task.resume()
     }
-    
-    private lazy var tryMapHandler: (URLSession.DataTaskPublisher.Output) throws -> Data = { output in
-        guard let response = output.response as? HTTPURLResponse else {
-            throw ErrorResponse(errorMessage: "Server Hatası", errorCode: 500, errorType: .serverError)
+
+    func getForecastWeather(at latitude: Double, longitude: Double, completionHandler completion: @escaping ForecastWeatherCompletionHandler) {
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&APPID=\(self.apiKey)&units=metric")!
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        completion(nil, error)
+                        return
+                    }
+                    
+                    do {
+                        let forecast = try self.decoder.decode(ForecastWeatherResponse.self, from: data)
+                        completion(forecast, nil)
+                    } catch let error {
+                        completion(nil, error)
+                    }
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
         }
         
-        let stringData = String(data: output.data, encoding: .utf8)
-        printSuccess("Response: \(stringData ?? "")")
+        task.resume()
+    }
+
+    func getWeatherForCoordinates(latitude: Double, longitude: Double, completionHandler completion: @escaping CurrentWeatherCompletionHandler) {
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&APPID=\(self.apiKey)&units=metric")!
+        let request = URLRequest(url: url)
         
-        if response.statusCode == 555 {
-            SessionManager.shared.endSession()
-            throw ErrorResponse(errorMessage: stringData, errorCode: response.statusCode, errorType: .missingData)
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        completion(nil, error)
+                        return
+                    }
+                    
+                    do {
+                        let weather = try self.decoder.decode(CurrentWeather.self, from: data)
+                        completion(weather, nil)
+                    } catch let error {
+                        completion(nil, error)
+                    }
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
         }
         
-        guard response.statusCode >= 200 && response.statusCode < 300 else {
-            throw ErrorResponse(errorMessage: stringData, errorCode: response.statusCode, errorType: .missingData)
+        task.resume()
+    }
+    func getCurrentWeatherwihtCity(at city: String, completionHandler completion: @escaping CurrentWeatherCompletionHandler) {
+        // Şehir adı kullanarak URL oluşturma
+        let url = baseUrl(.currentWeather, param: "&q=\(city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        printError(response ?? "e")
+                        return
+                    }
+                    
+                    if httpResponse.statusCode == 200 {
+                        do {
+                            let weather = try self.decoder.decode(CurrentWeather.self, from: data)
+                            completion(weather, nil)
+                        } catch let error {
+                            completion(nil, error)
+                        }
+                    } else {
+                        printError(response ?? "e")
+                    }
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
         }
-       return output.data
+        
+        task.resume()
     }
 
 }

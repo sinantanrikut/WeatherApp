@@ -11,9 +11,9 @@ import SwiftUI
 import FirebaseAuth
 
 struct SignUpView: View {
+    @EnvironmentObject private var viewModel : LoginViewModel
     @State private var email = ""
     @State private var password = ""
-    @State private var errorMessage = ""
 
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct SignUpView: View {
                 .cornerRadius(5)
 
             Button(action: {
-                signUp()
+                viewModel.signUp(email: email, password: password)
             }, label: {
                 Text("Sign Up")
                     .foregroundColor(.white)
@@ -38,28 +38,13 @@ struct SignUpView: View {
                     .cornerRadius(5)
             })
             .padding(.top, 20)
-
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-            }
-
+  
             Spacer()
         }
         .padding()
         .navigationTitle("Sign Up")
     }
 
-    func signUp() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                errorMessage = error.localizedDescription
-            } else {
-                errorMessage = "Account created successfully!"
-            }
-        }
-    }
 }
 
 

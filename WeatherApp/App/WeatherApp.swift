@@ -28,6 +28,7 @@ struct WeatherApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     @StateObject private var loginViewModel = LoginViewModel()
+    @StateObject var locationManager = LocationManager()
 //    @StateObject private var appTheme = AppTheme()
 //    @StateObject private var userViewModel = UserViewModel()
 //    @StateObject private var navigationManager = NavigationManager()
@@ -48,7 +49,7 @@ struct WeatherApp: App {
                 ContentView()
                     .preferredColorScheme(.light)
                     .environmentObject(loginViewModel)
-//                    .environmentObject(appTheme)
+                    .environmentObject(locationManager)
 //                    .environmentObject(userViewModel)
 //                    .environmentObject(navigationManager)
 //                    .onAppear(perform: appTheme.updateNavigationBarColor)

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @EnvironmentObject private var loginViewModel: LoginViewModel
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject private var loginViewModel: LoginViewModel
 //    @EnvironmentObject private var viewModel: UserViewModel
 //    @EnvironmentObject private var appTheme: AppTheme
     

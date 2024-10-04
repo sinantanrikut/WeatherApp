@@ -13,7 +13,6 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var showSignup = false
-    @State private var errorMessage = ""
     
     var body: some View {
         VStack {
@@ -39,12 +38,6 @@ struct LoginView: View {
                     .cornerRadius(5)
             })
             .padding(.top, 20)
-            
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-            }
             
             Spacer()
             
