@@ -184,5 +184,36 @@ final class APIManager {
         
         task.resume()
     }
+    func getForecastWeatherWithCity(at city: String, completionHandler completion: @escaping ForecastWeatherCompletionHandler) {
+        // Şehir adı kullanarak URL oluşturma
+        let url = baseUrl(.forecastWeather, param: "&q=\(city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")")
+        let request = URLRequest(url: url)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let data = data {
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        printError(response ?? "e")
+                        return
+                    }
+                    
+                    if httpResponse.statusCode == 200 {
+                        do {
+                            let forecastResponse = try self.decoder.decode(ForecastWeatherResponse.self, from: data)
+                            completion(forecastResponse, nil)
+                        } catch let error {
+                            completion(nil, error)
+                        }
+                    } else {
+                        printError(response ?? "e")
+                    }
+                } else if let error = error {
+                    completion(nil, error)
+                }
+            }
+        }
+        
+        task.resume()
+    }
 
 }

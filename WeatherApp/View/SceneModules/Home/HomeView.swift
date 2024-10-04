@@ -9,9 +9,20 @@ import SwiftUI
 import FirebaseAuth
 
 struct HomeView: View {
-
     var body: some View {
-        WelcomeView()
+        TabView {
+            WelcomeView()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Anasayfa")
+                }
+            
+            ListView()
+                .tabItem {
+                    Image(systemName: "building.2.fill")
+                    Text("Şehirler")
+                }
+        }
     }
 }
 

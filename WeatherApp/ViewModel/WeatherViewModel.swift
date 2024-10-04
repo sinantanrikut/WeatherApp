@@ -167,6 +167,19 @@ class WeatherViewModel: ObservableObject {
             }
             ws.updateStateView()
         }
+        // Tahmin hava durumunu al
+        client.getForecastWeatherWithCity(at: city) { [weak self] forecastWeatherResponse, error in
+            guard let ws = self else { return }
+            
+            if let forecastWeatherResponse = forecastWeatherResponse {
+                ws.hourlyWeathers = forecastWeatherResponse.list
+                ws.dailyWeathers = forecastWeatherResponse.dailyList
+                ws.stateForecastWeather = .success
+            } else {
+                ws.stateForecastWeather = .failed
+            }
+            ws.updateStateView()
+        }
     }
 
 }

@@ -31,7 +31,7 @@ struct WelcomeView: View {
                     })
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .background(Color.white.opacity(0.8)) 
+                    .background(Color.white.opacity(0.8))
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
                     .padding(.horizontal, 24)

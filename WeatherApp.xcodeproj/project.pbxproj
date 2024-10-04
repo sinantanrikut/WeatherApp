@@ -66,6 +66,11 @@
 		BA7B6A702CB02F6D00C3FE61 /* DailyWeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B6A6F2CB02F6D00C3FE61 /* DailyWeatherCellView.swift */; };
 		BA7B6A722CB02F8D00C3FE61 /* DetailsCurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B6A712CB02F8D00C3FE61 /* DetailsCurrentWeatherView.swift */; };
 		BA7B6A742CB02FB100C3FE61 /* DetailsCurrentWeatherCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B6A732CB02FB100C3FE61 /* DetailsCurrentWeatherCellView.swift */; };
+		BA7B6A782CB0A45700C3FE61 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BA7B6A772CB0A45700C3FE61 /* FirebaseFirestore */; };
+		BA7B6A7A2CB0A5EA00C3FE61 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B6A792CB0A5EA00C3FE61 /* ListView.swift */; };
+		BA7B6A7C2CB0A8C300C3FE61 /* CityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7B6A7B2CB0A8C300C3FE61 /* CityDetailView.swift */; };
+		BA7B6A7E2CB0B13800C3FE61 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BA7B6A7D2CB0B13800C3FE61 /* FirebaseMessaging */; };
+		BA7B6A802CB0B1C200C3FE61 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = BA7B6A7F2CB0B1C200C3FE61 /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +128,8 @@
 		BA7B6A6F2CB02F6D00C3FE61 /* DailyWeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherCellView.swift; sourceTree = "<group>"; };
 		BA7B6A712CB02F8D00C3FE61 /* DetailsCurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCurrentWeatherView.swift; sourceTree = "<group>"; };
 		BA7B6A732CB02FB100C3FE61 /* DetailsCurrentWeatherCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCurrentWeatherCellView.swift; sourceTree = "<group>"; };
+		BA7B6A792CB0A5EA00C3FE61 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		BA7B6A7B2CB0A8C300C3FE61 /* CityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,12 +137,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7B6A7E2CB0B13800C3FE61 /* FirebaseMessaging in Frameworks */,
 				BA40A6BD2CAED1740076FF1D /* FirebaseAppCheck in Frameworks */,
 				BA40A6E72CAEDD3C0076FF1D /* FirebaseAuth in Frameworks */,
 				BA40A6B72CAED1740076FF1D /* FirebaseAnalytics in Frameworks */,
 				BA40A6BF2CAED1740076FF1D /* FirebaseAppDistribution-Beta in Frameworks */,
 				BA40A6BB2CAED1740076FF1D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				BA40A6B92CAED1740076FF1D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				BA7B6A802CB0B1C200C3FE61 /* FirebaseCore in Frameworks */,
+				BA7B6A782CB0A45700C3FE61 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +297,8 @@
 				BA40A6C02CAED3420076FF1D /* Authentication */,
 				BA40A6A92CAECC0D0076FF1D /* LaunchScreen */,
 				BA40A6F92CAF82400076FF1D /* WelcomeView.swift */,
+				BA7B6A7B2CB0A8C300C3FE61 /* CityDetailView.swift */,
+				BA7B6A792CB0A5EA00C3FE61 /* ListView.swift */,
 			);
 			path = SceneModules;
 			sourceTree = "<group>";
@@ -417,6 +429,9 @@
 				BA40A6BC2CAED1740076FF1D /* FirebaseAppCheck */,
 				BA40A6BE2CAED1740076FF1D /* FirebaseAppDistribution-Beta */,
 				BA40A6E62CAEDD3C0076FF1D /* FirebaseAuth */,
+				BA7B6A772CB0A45700C3FE61 /* FirebaseFirestore */,
+				BA7B6A7D2CB0B13800C3FE61 /* FirebaseMessaging */,
+				BA7B6A7F2CB0B1C200C3FE61 /* FirebaseCore */,
 			);
 			productName = WeatherApp;
 			productReference = BA40A68D2CAEC9F70076FF1D /* WeatherApp.app */;
@@ -502,6 +517,7 @@
 				BA40A6912CAEC9F70076FF1D /* WeatherApp.swift in Sources */,
 				BA40A70C2CAF88880076FF1D /* ForecastWeatherResponse.swift in Sources */,
 				BA40A6C62CAED81A0076FF1D /* BaseViewModel.swift in Sources */,
+				BA7B6A7C2CB0A8C300C3FE61 /* CityDetailView.swift in Sources */,
 				BA7B6A742CB02FB100C3FE61 /* DetailsCurrentWeatherCellView.swift in Sources */,
 				BA40A7062CAF87C30076FF1D /* WeatherWind.swift in Sources */,
 				BA40A6C42CAED7DE0076FF1D /* AppTheme.swift in Sources */,
@@ -515,6 +531,7 @@
 				BA7B6A6E2CB02F4C00C3FE61 /* DailyWeatherView.swift in Sources */,
 				BA40A6FE2CAF87640076FF1D /* CurrentWeather.swift in Sources */,
 				BA40A6D02CAED9020076FF1D /* ServiceProvider.swift in Sources */,
+				BA7B6A7A2CB0A5EA00C3FE61 /* ListView.swift in Sources */,
 				BA40A6AE2CAECC8A0076FF1D /* Color+Extensions.swift in Sources */,
 				BA40A7082CAF87DF0076FF1D /* WeatherClouds.swift in Sources */,
 				BA40A6DF2CAEDA4E0076FF1D /* GlobalHelpers.swift in Sources */,
@@ -775,6 +792,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		BA7B6A772CB0A45700C3FE61 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		BA7B6A7D2CB0B13800C3FE61 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		BA7B6A7F2CB0B1C200C3FE61 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA40A6B52CAED1740076FF1D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
