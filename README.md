@@ -54,8 +54,10 @@ Here is a link to a video showcasing the app:
 
 ## Screenshots
 ![Screenshot1](https://img.imgyukle.com/2024/10/05/CarLeA.png)
-![Screenshot2](https://img.imgyukle.com/2024/10/05/CarHcH.png)
-![Screenshot3](https://img.imgyukle.com/2024/10/05/CarOk1.png)
+![CarLeA](https://img.imgyukle.com/2024/10/05/CarLeA.png)
+![CarHcH](https://github.com/kullanıcı_adı/repo_adi/raw/main/görsel_yolu/CarHcH.png)
+![CarOk1](https://github.com/kullanıcı_adı/repo_adi/raw/main/görsel_yolu/CarOk1.png)
+
 
 ## Contributing
 
