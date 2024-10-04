@@ -53,7 +53,6 @@ Here is a link to a video showcasing the app:
 [Watch the demo video here](https://example.com)  <!-- Replace with your actual video link -->
 
 ## Screenshots
-
 ![Screenshot1](https://img.imgyukle.com/2024/10/05/CarLeA.png)
 ![Screenshot2](https://img.imgyukle.com/2024/10/05/CarHcH.png)
 ![Screenshot3](https://img.imgyukle.com/2024/10/05/CarOk1.png)
